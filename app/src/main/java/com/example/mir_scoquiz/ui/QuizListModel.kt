@@ -1,4 +1,4 @@
-package com.example.mir_scoquiz
+package com.example.mir_scoquiz.ui
 
 import android.opengl.Visibility
 

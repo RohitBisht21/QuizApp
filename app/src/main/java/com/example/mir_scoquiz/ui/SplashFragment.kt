@@ -1,22 +1,16 @@
-package com.example.mir_scoquiz
+package com.example.mir_scoquiz.ui
 
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import com.example.mir_scoquiz.R
 import com.example.mir_scoquiz.databinding.FragmentSplashBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay

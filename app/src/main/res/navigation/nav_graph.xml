@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment2"
-        android:name="com.example.mir_scoquiz.SplashFragment"
+        android:name="com.example.mir_scoquiz.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mir_scoquiz.ListFragment"
+        android:name="com.example.mir_scoquiz.ui.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.mir_scoquiz.InfoFragment"
+        android:name="com.example.mir_scoquiz.ui.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/quesFragment"
-        android:name="com.example.mir_scoquiz.QuesFragment"
+        android:name="com.example.mir_scoquiz.ui.QuesFragment"
         android:label="fragment_ques"
         tools:layout="@layout/fragment_ques" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/finalFragment"
-        android:name="com.example.mir_scoquiz.FinalFragment"
+        android:name="com.example.mir_scoquiz.ui.FinalFragment"
         android:label="fragment_final"
         tools:layout="@layout/fragment_final" />
 </navigation>
