@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "527793600503",
+    "project_id": "mir-sco-quiz",
+    "storage_bucket": "mir-sco-quiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527793600503:android:6ac1bcc23a8e18f51060f2",
+        "android_client_info": {
+          "package_name": "com.example.mir_scoquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527793600503-b04hunq6qm70k3uiqvcl01n7o9tn7ngo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV-z3MItDalRoai1FDOMkxA1tU8XzyJNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527793600503-b04hunq6qm70k3uiqvcl01n7o9tn7ngo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

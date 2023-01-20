@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment2">
+
+    <fragment
+        android:id="@+id/splashFragment2"
+        android:name="com.example.mir_scoquiz.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment2_to_listFragment"
+            app:destination="@id/listFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/splashFragment2"/>
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.mir_scoquiz.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.mir_scoquiz.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_infoFragment_to_quesFragment"
+            app:destination="@id/quesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quesFragment"
+        android:name="com.example.mir_scoquiz.QuesFragment"
+        android:label="fragment_ques"
+        tools:layout="@layout/fragment_ques" >
+        <action
+            android:id="@+id/action_quesFragment_to_finalFragment"
+            app:destination="@id/finalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finalFragment"
+        android:name="com.example.mir_scoquiz.FinalFragment"
+        android:label="fragment_final"
+        tools:layout="@layout/fragment_final" />
+</navigation>
