@@ -13,3 +13,5 @@ data class Result(
     val question: String,
     val type: String
 )
+
+

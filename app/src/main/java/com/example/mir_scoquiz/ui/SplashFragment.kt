@@ -37,11 +37,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private lateinit var binding: FragmentSplashBinding
 
 
-    private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val firebaseAuth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance() }
     private val navController: NavController by lazy {
         Navigation.findNavController(binding.root)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +66,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     fun navigateToListScreen() {
         lifecycleScope.launch {
             delay(2000)
-            navController?.navigate(R.id.action_splashFragment2_to_listFragment)
+            navController.navigate(R.id.action_splashFragment2_to_listFragment)
         }
     }
 

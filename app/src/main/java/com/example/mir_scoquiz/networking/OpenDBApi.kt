@@ -14,7 +14,6 @@ interface OpenDBApi {
         @Query("difficulty") difficulty: String,
         @Query("type") type: String
     ): QuestionQueryResult
-
     companion object {
         const val BASE_URL = "https://opentdb.com/"
 
