@@ -1,7 +1,7 @@
 package com.example.mir_scoquiz.networking
 
-import retrofit2.GsonConverterFactory
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
    private val retrofit by lazy{
