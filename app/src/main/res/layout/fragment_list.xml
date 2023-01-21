@@ -14,14 +14,15 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="64dp"
         android:fontFamily="@font/work_sans"
-        android:text="Mir-Sco"
-        android:textColor="@color/colorPrimary"
+        android:text="Choose Category"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_view"
+        tools:listitem="@layout/single_list_item"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
