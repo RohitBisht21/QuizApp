@@ -14,9 +14,8 @@ import com.example.mir_scoquiz.networking.RetrofitInstance
 import com.google.gson.Gson
 import retrofit2.*
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment() {
     private lateinit var listView: RecyclerView
-    private lateinit var binding: FragmentSplashBinding
     private  lateinit var adapter:QuizListAdapter
     private lateinit var questionArrayList:ArrayList<QuestionQueryResult>
 
@@ -32,8 +31,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSplashBinding.inflate(inflater)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_list,container,false)
         getData()
     }
 
@@ -44,7 +42,7 @@ private fun getData()
             call: Call<QuestionQueryResult?>,
             response: Response<QuestionQueryResult?>
         ) {
-            TODO("Not yet implemented")
+            response.body()?.results
         }
 
         override fun onFailure(call: Call<QuestionQueryResult?>, t: Throwable) {
