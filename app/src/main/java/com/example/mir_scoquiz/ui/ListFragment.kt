@@ -17,6 +17,14 @@ import retrofit2.*
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var listView: RecyclerView
     private lateinit var binding: FragmentSplashBinding
+    private  lateinit var adapter:QuizListAdapter
+    private lateinit var questionArrayList:ArrayList<QuestionQueryResult>
+
+    lateinit var imageId:Array<Int>
+    lateinit var category:Array<String>
+    lateinit var type:Array<String>
+    lateinit var difficulty:Array<String>
+
     companion object {
         const val BASE_URL = "https://opentdb.com/"
     }
@@ -27,8 +35,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding = FragmentSplashBinding.inflate(inflater)
         return binding.root
         getData()
-
-
     }
 
 private fun getData()
@@ -46,5 +52,4 @@ private fun getData()
         }
     })
 }
-
 }

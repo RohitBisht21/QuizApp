@@ -11,7 +11,8 @@ data class Result(
     @Json(name = "incorrect_answers")
     val incorrectAnswers: List<String>,
     val question: String,
-    val type: String
+    val type: String,
+    val titleImage:Int
 )
 
 
