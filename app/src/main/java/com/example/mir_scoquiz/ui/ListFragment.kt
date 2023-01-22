@@ -26,6 +26,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view= inflater.inflate(R.layout.fragment_list,container,false)
         getData()
         return view
@@ -42,12 +43,13 @@ class ListFragment : Fragment() {
                 response: Response<QuestionQueryResult?>
             ) {
                 val result: QuestionQueryResult?= response.body()
-                adapter= result?.let { QuizListAdapter(this@ListFragment, it) }!!
-                listView.adapter=adapter
-                listView.layoutManager= LinearLayoutManager(requireContext())
+
                 if(result!=null)
                 {
                     Log.e("api",result.toString())
+                    listView.layoutManager= LinearLayoutManager(requireContext())
+                    adapter=QuizListAdapter(this@ListFragment, result.results)
+                    listView.adapter=adapter
 
                 }
             }

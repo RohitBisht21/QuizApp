@@ -12,7 +12,6 @@ data class Result(
     val incorrectAnswers: List<String>,
     val question: String,
     val type: String,
-    val titleImage:Int
 )
 
 
