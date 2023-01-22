@@ -1,28 +1,23 @@
 package com.example.mir_scoquiz.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mir_scoquiz.R
-import com.example.mir_scoquiz.databinding.FragmentSplashBinding
 import com.example.mir_scoquiz.models.QuestionQueryResult
 import com.example.mir_scoquiz.networking.RetrofitInstance
-import com.google.gson.Gson
 import retrofit2.*
 
 class ListFragment : Fragment() {
-    private lateinit var listView: RecyclerView
-    private  lateinit var adapter:QuizListAdapter
-    private lateinit var questionArrayList:ArrayList<QuestionQueryResult>
+    lateinit var listView: RecyclerView
+    lateinit var adapter:QuizListAdapter
+    lateinit var linearLayoutManager: LinearLayoutManager
 
-    lateinit var imageId:Array<Int>
-    lateinit var category:Array<String>
-    lateinit var type:Array<String>
-    lateinit var difficulty:Array<String>
 
     companion object {
         const val BASE_URL = "https://opentdb.com/"
@@ -31,23 +26,39 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list,container,false)
+        val view= inflater.inflate(R.layout.fragment_list,container,false)
         getData()
+        return view
+
     }
 
-private fun getData()
-{
-    RetrofitInstance.apiInterface.getQuestions().enqueue(object : Callback<QuestionQueryResult?> {
-        override fun onResponse(
-            call: Call<QuestionQueryResult?>,
-            response: Response<QuestionQueryResult?>
-        ) {
-            response.body()?.results
-        }
+    fun getData()
+    {
 
-        override fun onFailure(call: Call<QuestionQueryResult?>, t: Throwable) {
-       //  Toast.makeText(this@ListFragment,"${t.localizedMessage}",Toast.LENGTH_SHORT).show()
-        }
-    })
-}
+        RetrofitInstance.apiInterface.getQuestions().enqueue(object :
+            Callback<QuestionQueryResult?> {
+            override fun onResponse(
+                call: Call<QuestionQueryResult?>,
+                response: Response<QuestionQueryResult?>
+            ) {
+                val result: QuestionQueryResult?= response.body()
+                adapter= result?.let { QuizListAdapter(this@ListFragment, it) }!!
+                listView.adapter=adapter
+                listView.layoutManager= LinearLayoutManager(requireContext())
+                if(result!=null)
+                {
+                    Log.e("api",result.toString())
+
+                }
+            }
+
+            override fun onFailure(call: Call<QuestionQueryResult?>, t: Throwable) {
+                Log.e("api","Error in Fetching List",t)
+            }
+        })
+    }
+
+
+
+
 }

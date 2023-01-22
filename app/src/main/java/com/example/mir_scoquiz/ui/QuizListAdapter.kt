@@ -1,6 +1,6 @@
 package com.example.mir_scoquiz.ui
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mir_scoquiz.R
 import com.example.mir_scoquiz.models.QuestionQueryResult
-import com.example.mir_scoquiz.models.Result
 import com.google.android.material.imageview.ShapeableImageView
 
-class QuizListAdapter(val context:Context,val userList:List<Result>): RecyclerView.Adapter<QuizListAdapter.QuizViewHolder>() {
+class QuizListAdapter(val context: ListFragment, val userList: QuestionQueryResult): RecyclerView.Adapter<QuizListAdapter.QuizViewHolder>() {
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
       val itemView=LayoutInflater.from(parent.context).inflate(R.layout.single_list_item,parent,false)
         return QuizViewHolder(itemView)

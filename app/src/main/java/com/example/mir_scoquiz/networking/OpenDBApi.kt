@@ -16,6 +16,7 @@ interface OpenDBApi {
         @Query("type") type: String
     ): QuestionQueryResult
 
+    @GET("api.php")
     fun getQuestions(): Call<QuestionQueryResult>
 
     companion object {
