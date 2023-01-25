@@ -9,19 +9,13 @@ import retrofit2.http.Query
 interface OpenDBApi {
 
     @GET("api.php")
-     fun getQuestions(
+    suspend fun getQuestions(
         @Query("amount") amount: Int,
-        @Query("category") category: String,
-        @Query("difficulty") difficulty: String,
-        @Query("type") type: String
+        @Query("type") type: String,
+        @Query("difficulty") difficulty: String
     ): QuestionQueryResult
-
-    @GET("api.php")
-    fun getQuestions(@Query("amount") amount: Int,@Query("type") type: String): Call<QuestionQueryResult>
 
     companion object {
         const val BASE_URL = "https://opentdb.com/"
-
-
     }
 }

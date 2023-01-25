@@ -6,63 +6,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mir_scoquiz.R
+import com.example.mir_scoquiz.databinding.FragmentListBinding
 import com.example.mir_scoquiz.models.QuestionQueryResult
 import com.example.mir_scoquiz.networking.RetrofitInstance
+import com.example.mir_scoquiz.networking.RetrofitInstance.apiInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.*
 
 class ListFragment : Fragment() {
-    lateinit var listView: RecyclerView
-    lateinit var adapter:QuizListAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
 
-
-    companion object {
-        const val BASE_URL = "https://opentdb.com/"
-    }
+    lateinit var adapter: QuizListAdapter
+    lateinit var binding: FragmentListBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        val view= inflater.inflate(R.layout.fragment_list,container,false)
-        listView=view.findViewById(R.id.list_view)
-        listView.layoutManager= LinearLayoutManager(requireContext())
-        adapter=QuizListAdapter(this@ListFragment, emptyList())
-        listView.adapter=adapter
+    ): View {
+        binding = FragmentListBinding.inflate(inflater, container, false)
         getData()
-        return view
-
+        return binding.root
     }
 
-    fun getData()
-    {
-
-        RetrofitInstance.apiInterface.getQuestions(10,"multiple").enqueue(object :
-            Callback<QuestionQueryResult?> {
-            override fun onResponse(
-                call: Call<QuestionQueryResult?>,
-                response: Response<QuestionQueryResult?>
-            ) {
-                val result: QuestionQueryResult?= response.body()
-
-                if(result!=null)
-                {
-                    Log.e("api",result.toString())
-                    adapter.userList=result.results
-                    adapter.notifyDataSetChanged()
+    fun getData() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val questionList = apiInterface.getQuestions(10, "multiple", "easy")
+            withContext(Dispatchers.Main) {
+                binding.apply {
+                    listView.layoutManager = LinearLayoutManager(requireContext())
+                    adapter = QuizListAdapter(questionList.results).also {
+                        listView.adapter = it
+                    }
                 }
             }
-
-            override fun onFailure(call: Call<QuestionQueryResult?>, t: Throwable) {
-                Log.e("api","Error in Fetching List",t)
-            }
-        })
+        }
     }
-
-
-
-
 }
