@@ -17,6 +17,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import android.os.Handler
+import kotlinx.coroutines.tasks.await
+
 class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding
@@ -29,29 +31,28 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentUser = firebaseAuth.getCurrentUser()
-        if (currentUser == null) {
-            firebaseAuth.signInAnonymously()
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        navigateToListScreen()
-                    } else {
-                        Log.d(TAG, "signInAnonymously:failed" + task.exception)
-                    }
+        lifecycleScope.launch {
+            if (firebaseAuth.currentUser == null) {
+                runCatching {
+                    firebaseAuth.signInAnonymously().await()
+                }.onSuccess {
+                    navigateToListScreen()
+                }.onFailure {
+                    Log.e(TAG, "GSign In Failure", it)
                 }
-        } else {
-            navigateToListScreen()
+            } else {
+                navigateToListScreen()
+            }
         }
     }
 
-    fun navigateToListScreen() {
+    private fun navigateToListScreen() {
         lifecycleScope.launch {
             delay(2000)
             findNavController().navigate(R.id.action_splashFragment_to_listFragment)
