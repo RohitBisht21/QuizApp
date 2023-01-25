@@ -28,6 +28,10 @@ class ListFragment : Fragment() {
     ): View? {
 
         val view= inflater.inflate(R.layout.fragment_list,container,false)
+        listView=view.findViewById(R.id.list_view)
+        listView.layoutManager= LinearLayoutManager(requireContext())
+        adapter=QuizListAdapter(this@ListFragment, emptyList())
+        listView.adapter=adapter
         getData()
         return view
 
@@ -36,7 +40,7 @@ class ListFragment : Fragment() {
     fun getData()
     {
 
-        RetrofitInstance.apiInterface.getQuestions().enqueue(object :
+        RetrofitInstance.apiInterface.getQuestions(10,"multiple").enqueue(object :
             Callback<QuestionQueryResult?> {
             override fun onResponse(
                 call: Call<QuestionQueryResult?>,
@@ -47,10 +51,8 @@ class ListFragment : Fragment() {
                 if(result!=null)
                 {
                     Log.e("api",result.toString())
-                    listView.layoutManager= LinearLayoutManager(requireContext())
-                    adapter=QuizListAdapter(this@ListFragment, result.results)
-                    listView.adapter=adapter
-
+                    adapter.userList=result.results
+                    adapter.notifyDataSetChanged()
                 }
             }
 

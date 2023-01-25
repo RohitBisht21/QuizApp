@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mir_scoquiz.R
 import com.example.mir_scoquiz.models.Result
 
-class QuizListAdapter(val context: ListFragment, val userList: List<Result>): RecyclerView.Adapter<QuizListAdapter.QuizViewHolder>() {
+class QuizListAdapter(val context: ListFragment, var userList: List<Result>): RecyclerView.Adapter<QuizListAdapter.QuizViewHolder>() {
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {

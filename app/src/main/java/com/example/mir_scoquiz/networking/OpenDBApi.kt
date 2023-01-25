@@ -17,7 +17,7 @@ interface OpenDBApi {
     ): QuestionQueryResult
 
     @GET("api.php")
-    fun getQuestions(): Call<QuestionQueryResult>
+    fun getQuestions(@Query("amount") amount: Int,@Query("type") type: String): Call<QuestionQueryResult>
 
     companion object {
         const val BASE_URL = "https://opentdb.com/"
