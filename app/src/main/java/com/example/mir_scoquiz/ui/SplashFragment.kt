@@ -17,68 +17,44 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import android.os.Handler
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SplashFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SplashFragment : Fragment() {
-    // TODO: Rename and change types of parameter
-    companion object {
-        private final const val STARTLOG: String = "Start log"
-    }
 
     private lateinit var binding: FragmentSplashBinding
 
-
     private val firebaseAuth: FirebaseAuth by lazy {
-        FirebaseAuth.getInstance() }
+        FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash,container,false)
-
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-
-override fun onStart(){
-super.onStart()
-    val currentUser = firebaseAuth.getCurrentUser()
-    if (currentUser == null) {
-        firebaseAuth.signInAnonymously()
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                   navigateToListScreen()
-                } else {
-                    Log.d(TAG, "signInAnonymously:failed" + task.exception)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val currentUser = firebaseAuth.getCurrentUser()
+        if (currentUser == null) {
+            firebaseAuth.signInAnonymously()
+                .addOnCompleteListener() { task ->
+                    if (task.isSuccessful) {
+                        navigateToListScreen()
+                    } else {
+                        Log.d(TAG, "signInAnonymously:failed" + task.exception)
+                    }
                 }
-            }
-    } else {
-        navigateToListScreen()
+        } else {
+            navigateToListScreen()
+        }
     }
-
-}
-
 
     fun navigateToListScreen() {
-     //   findNavController().navigate(R.id.action_splashFragment_to_listFragment)
-        delayFunction({ findNavController().navigate(R.id.action_splashFragment_to_listFragment)}, 3000)
-   }
-
-
-
-    fun delayFunction(function: ()-> Unit, delay: Long) {
-        Handler().postDelayed(function, delay)
+        lifecycleScope.launch {
+            delay(2000)
+            findNavController().navigate(R.id.action_splashFragment_to_listFragment)
+        }
     }
-
 }
